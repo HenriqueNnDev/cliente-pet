@@ -24,7 +24,7 @@ public class ClienteListResponse {
 	public ClienteListResponse(Cliente cliente) {
 		this.idCliente = cliente.getIdCliente();
 		this.nomeCompleto = cliente.getNomeCompleto();
-		this.cpf = cliente.getCPF();
+		this.cpf = cliente.getCpf();
 		this.email = cliente.getEmail();
 		this.celular = cliente.getCelular();
 	}

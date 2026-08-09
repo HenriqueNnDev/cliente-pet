@@ -23,7 +23,7 @@ public class ClienteRequest {
 	@NotNull
 	private LocalDate dataNascimento;
 	@org.hibernate.validator.constraints.br.CPF
-	private String CPF;	
+	private String cpf;	
 	@NotNull
 	private Boolean aceitaTermos;
 }

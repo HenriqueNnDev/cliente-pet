@@ -25,19 +25,27 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false, unique = true, nullable = false)
 	private UUID idCliente;
+	
 	@NotBlank
 	private String nomeCompleto;
+	
 	@NotBlank
 	@Email
 	private String email;
+	
 	@NotBlank
 	private String celular;
+	
 	private String telefone;
+	
 	private Sexo sexo;
+	
 	@NotNull
 	private LocalDate dataNascimento;
+	
 	@org.hibernate.validator.constraints.br.CPF
-	private String CPF;	
+	private String cpf;	
+	
 	@NotNull
 	private Boolean aceitaTermos;
 	
@@ -51,9 +59,9 @@ public class Cliente {
 		this.telefone = clienteRequest.getTelefone();
 		this.sexo = clienteRequest.getSexo();
 		this.dataNascimento = clienteRequest.getDataNascimento();
-		this.CPF = clienteRequest.getCPF();
+		this.cpf = clienteRequest.getCpf();
 		this.aceitaTermos = clienteRequest.getAceitaTermos();
 		this.dataHoraDoCadastro = LocalDateTime.now();
+		this.dataHoraDaUltimaAlteracao = LocalDateTime.now();
 	}
-	
 }
