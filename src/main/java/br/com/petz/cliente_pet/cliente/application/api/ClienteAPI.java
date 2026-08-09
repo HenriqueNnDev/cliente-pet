@@ -12,7 +12,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/v1/cliente")
 public interface ClienteAPI {
-	@PostMapping
+	@PostMapping 
 	@ResponseStatus(code = HttpStatus.CREATED)
 	ClienteResponse postCliente(@Valid @RequestBody ClienteRequest clienteRequest);
 }
