@@ -31,5 +31,4 @@ public class ClienteInfraRepository implements ClienteRepository {
 		log.info("[finaliza] ClienteInfraRepository - buscaTodosClientes");
 		return todosClientes;
 	}
-
 }
