@@ -3,11 +3,13 @@ package br.com.petz.cliente_pet.cliente.infra;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
 import br.com.petz.cliente_pet.cliente.application.repository.ClienteRepository;
 import br.com.petz.cliente_pet.cliente.domain.Cliente;
+import br.com.petz.cliente_pet.handler.APIException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -21,7 +23,11 @@ public class ClienteInfraRepository implements ClienteRepository {
     @Override
     public Cliente salva(Cliente cliente) {
         log.info("[inicia] ClienteInfraRepository - salva");
-        clienteSpringDataJPARepository.save(cliente);
+        try {
+            clienteSpringDataJPARepository.save(cliente);
+        } catch (DataIntegrityViolationException e) {
+            throw APIException.build(HttpStatus.BAD_REQUEST, "Existem dados duplicados");
+        }
         log.info("[finaliza] ClienteInfraRepository - salva");
         return cliente;
     }
@@ -36,7 +42,7 @@ public class ClienteInfraRepository implements ClienteRepository {
 
     @Override
     public Cliente buscaTodosClientes(UUID idCliente) {
-        log.info("[inicia] ClienteInfraRepository - buscaTodosClientes(UUID)");
+         log.info("[inicia] ClienteInfraRepository - buscaTodosClientes(UUID)");
         Cliente cliente = clienteSpringDataJPARepository.findById(idCliente)
             .orElseThrow(() -> APIException.build(
                 HttpStatus.NOT_FOUND, "Cliente não encontrado!"));
