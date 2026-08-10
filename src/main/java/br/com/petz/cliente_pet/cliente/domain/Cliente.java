@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import br.com.petz.cliente_pet.cliente.application.api.ClienteRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,32 +25,25 @@ import lombok.NoArgsConstructor;
 public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, unique = true, nullable = false)
+	@Column(columnDefinition = "uuid", name = "idCliente", updatable = false, unique = true, nullable = false)
 	private UUID idCliente;
-	
 	@NotBlank
 	private String nomeCompleto;
-	
 	@NotBlank
 	@Email
+	@Column(unique = true)
 	private String email;
-	
 	@NotBlank
 	private String celular;
-	
 	private String telefone;
-	
 	private Sexo sexo;
-	
 	@NotNull
 	private LocalDate dataNascimento;
-	
-	@org.hibernate.validator.constraints.br.CPF
+	@CPF
+	@Column(unique = true)
 	private String cpf;	
-	
 	@NotNull
 	private Boolean aceitaTermos;
-	
 	private LocalDateTime dataHoraDoCadastro;
 	private LocalDateTime dataHoraDaUltimaAlteracao;
 	
