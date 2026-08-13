@@ -1,10 +1,12 @@
 package br.com.petz.cliente_pet.pet.application.api;
+
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,21 +19,24 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/v1/cliente/{idCliente}/pet")
 public interface PetAPI {
-		@PostMapping 
-		@ResponseStatus(code = HttpStatus.CREATED)
-		PetResponse postPet(@PathVariable UUID idCliente, 
-				@Valid @RequestBody PetRequest petRequest);
-		
-		@GetMapping 
-		@ResponseStatus(code = HttpStatus.OK)
-		List<PetClienteListResponse> getPetsDoClienteComID(@PathVariable UUID idCliente);
-		
-		@GetMapping("/{idPet}")
-		@ResponseStatus(code = HttpStatus.OK)
-		PetClienteDetalhadoResponse getClienteAtravesId(@PathVariable UUID idCliente, 
-				@PathVariable UUID idPet);
-		
-		@DeleteMapping("/{idPet}")
-		@ResponseStatus(code = HttpStatus.NO_CONTENT)
-		void deleteClienteAtravesId(@PathVariable UUID idCliente, @PathVariable UUID idPet);
+	@PostMapping
+	@ResponseStatus(code = HttpStatus.CREATED)
+	PetResponse postPet(@PathVariable UUID idCliente, @Valid @RequestBody PetRequest petRequest);
+
+	@GetMapping
+	@ResponseStatus(code = HttpStatus.OK)
+	List<PetClienteListResponse> getPetsDoClienteComID(@PathVariable UUID idCliente);
+
+	@GetMapping("/{idPet}")
+	@ResponseStatus(code = HttpStatus.OK)
+	PetClienteDetalhadoResponse getClienteAtravesId(@PathVariable UUID idCliente, @PathVariable UUID idPet);
+
+	@DeleteMapping("/{idPet}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	void deleteClienteAtravesId(@PathVariable UUID idCliente, @PathVariable UUID idPet);
+
+	@PatchMapping("/{idPet}")
+	@ResponseStatus(code = HttpStatus.NO_CONTENT)
+	PetResponse patchPet(@PathVariable UUID idCliente, @Valid @RequestBody PetAlteracaoRequest petAlteracaoRequest,
+			@PathVariable UUID idPet);
 }
