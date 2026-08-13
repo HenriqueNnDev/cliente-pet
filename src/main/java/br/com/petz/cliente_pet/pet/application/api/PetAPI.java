@@ -37,6 +37,6 @@ public interface PetAPI {
 
 	@PatchMapping("/{idPet}")
 	@ResponseStatus(code = HttpStatus.NO_CONTENT)
-	PetResponse patchPet(@PathVariable UUID idCliente, @Valid @RequestBody PetAlteracaoRequest petAlteracaoRequest,
+	void patchPet(@PathVariable UUID idCliente, @Valid @RequestBody PetAlteracaoRequest petAlteracaoRequest,
 			@PathVariable UUID idPet);
 }
